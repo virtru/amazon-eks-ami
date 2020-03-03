@@ -1,7 +1,7 @@
 {
   "variables": {
     "aws_region": "us-west-2",
-    "ami_name": null,
+    "ami_name": "eks node built @ {{timestamp}}",
     "creator": "{{env `USER`}}",
     "encrypted": "false",
     "kms_key_id": "",
@@ -23,12 +23,10 @@
     "source_ami_filter_name": "amzn2-ami-minimal-hvm-*",
     "arch": null,
     "instance_type": null,
-    "ami_description": "EKS Kubernetes Worker AMI with AmazonLinux2 image",
+    "ami_description": "{{timestamp}} - EKS Kubernetes Worker AMI with AmazonLinux2 image",
 
-    "ssh_interface": "",
     "ssh_username": "ec2-user",
     "temporary_security_group_source_cidrs": "",
-    "associate_public_ip_address": "",
     "subnet_id": ""
 
   },
@@ -67,16 +65,19 @@
         }
       ],
       "ssh_username": "{{user `ssh_username`}}",
-      "ssh_interface": "{{user `ssh_interface`}}",
+      "ssh_keypair_name": "jherwitz-h3",
+      "ssh_private_key_file": "~/.keys/jherwitz-h3.pem",
+      "security_group_id": "sg-0cb32440eeff94a1d",
       "temporary_security_group_source_cidrs": "{{user `temporary_security_group_source_cidrs`}}",
-      "associate_public_ip_address": "{{user `associate_public_ip_address`}}",
+      "associate_public_ip_address": true,
       "ssh_pty": true,
       "encrypt_boot": "{{user `encrypted`}}",
       "kms_key_id": "{{user `kms_key_id`}}",
       "run_tags": {
           "creator": "{{user `creator`}}"
       },
-      "subnet_id": "{{user `subnet_id`}}",
+      "vpc_id": "vpc-0743874fd0290caa3",
+      "subnet_id": "subnet-000995f44018d7aab",
       "tags": {
           "Name": "{{user `ami_name`}}",
           "created": "{{timestamp}}",
